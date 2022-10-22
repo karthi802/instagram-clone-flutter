@@ -17,3 +17,4 @@ export '../responsive/responsive_layout.dart';
 export '../responsive/moblie_screen.dart';
 export '../responsive/web_screen.dart';
 export '../screens/login_screen.dart';
+export '../screens/signup_screen.dart';
