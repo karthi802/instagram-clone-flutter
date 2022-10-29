@@ -4,6 +4,16 @@ class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  Future<Person> getUserDetails() async {
+    User currentUser = _auth.currentUser!;
+
+    DocumentSnapshot snap =
+        await _firestore.collection('users').doc(currentUser.uid).get();
+
+    return Person.fromSnap(snap); 
+
+  }
+
   //Signup user
   signUpUser({
     required String email,
@@ -29,17 +39,21 @@ class AuthMethods {
             .uploadImageToStorage('profilePics', file, false);
 
         //add user to database
-        await _firestore.collection('users').doc(cred.user!.uid).set({
-          'username': username,
-          'uid': cred.user!.uid,
-          'email': email,
-          'bio': bio,
-          'photourl': photoUrl,
-          'followers': [],
-          'following': [],
-        });
+        Person user = Person(
+          username: username,
+          uid: cred.user!.uid,
+          email: email,
+          bio: bio,
+          photoUrl: photoUrl,
+          followers: [],
+          following: [],
+        );
+        await _firestore
+            .collection('users')
+            .doc(cred.user!.uid)
+            .set(user.toJson());
 
-        res = 'successful';
+        res = 'success';
       }
     } catch (err) {
       res = err.toString();
@@ -53,18 +67,16 @@ class AuthMethods {
     required String password,
   }) async {
     String res = 'Error occrured';
-    
-    try {
-      if (email.isNotEmpty || password.isNotEmpty){
 
-        await _auth.signInWithEmailAndPassword(email: email, password: password);
+    try {
+      if (email.isNotEmpty || password.isNotEmpty) {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
         res = 'success';
-      }
-      else{
+      } else {
         res = 'Please enter all fields';
       }
-    }
-    catch(err) {
+    } catch (err) {
       res = err.toString();
     }
     return res;

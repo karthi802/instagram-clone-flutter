@@ -28,6 +28,11 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text, password: _passwordController.text);
 
     if (res == "success") {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => const ResponsiveLayout(
+            mobileScreenLayout: MobileScreenLayout(),
+            webScreenLayout: WebScreenLayout()),
+      ));
     } else {
       showSnackBar(res, context);
     }
@@ -89,12 +94,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: blueColor,
                   ),
                   child: _isLoading
-                  ? const Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: primaryColor,
-                    )
-                  )
-                  : const Text('Log in'),
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                          backgroundColor: primaryColor,
+                        ))
+                      : const Text('Log in'),
                 ),
               ),
               const SizedBox(
@@ -109,7 +113,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 8),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const SignUpScreen()));
+                    },
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: const Text(
