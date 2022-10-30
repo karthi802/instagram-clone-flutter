@@ -8,6 +8,7 @@ export 'package:flutter/foundation.dart';
 export 'package:flutter_svg/svg.dart';
 export 'package:image_picker/image_picker.dart';
 export 'package:provider/provider.dart';
+export 'package:uuid/uuid.dart';
 
 /// app libraries
 export '../utils/values.dart';
@@ -20,9 +21,11 @@ export '../functions/pick_image.dart';
 export '../functions/auth_method.dart';
 export '../functions/storage_method.dart';
 export '../functions/snack_bar.dart';
+export '../functions/firestore_method.dart';
 
 ///Models
 export '../models/person.dart';
+export '../models/post.dart';
 
 /// applications screens
 export '../responsive/responsive_layout.dart';
