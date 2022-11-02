@@ -1,5 +1,4 @@
 import 'package:intl/intl.dart';
-
 import '../utils/app_lib.dart';
 
 class PostCard extends StatefulWidget {
@@ -15,6 +14,27 @@ class PostCard extends StatefulWidget {
 
 class _PostCardState extends State<PostCard> {
   bool isLikeAnimating = false;
+  int commentLen = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    getComments();
+  }
+
+  void getComments() async {
+    try {
+      QuerySnapshot snap = await FirebaseFirestore.instance
+          .collection('posts')
+          .doc(widget.snap['postId'])
+          .collection('comments')
+          .get();
+      commentLen = snap.docs.length;
+    } catch (e) {
+      showSnackBar(e.toString(), context);
+    }
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -126,22 +146,27 @@ class _PostCardState extends State<PostCard> {
                 isAnimating: widget.snap['likes'].contains(person.uid),
                 smallLikes: true,
                 child: IconButton(
-                  onPressed: () async {
-                    await FirestoreMethods().likePost(
-                      widget.snap['postId'],
-                      person.uid,
-                      widget.snap['likes'],
-                    );
-                  },
-                  icon: widget.snap['likes'].contains(person.uid)? const Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  )
-                  : const Icon(Icons.favorite_border)
-                ),
+                    onPressed: () async {
+                      await FirestoreMethods().likePost(
+                        widget.snap['postId'],
+                        person.uid,
+                        widget.snap['likes'],
+                      );
+                    },
+                    icon: widget.snap['likes'].contains(person.uid)
+                        ? const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          )
+                        : const Icon(Icons.favorite_border)),
               ),
               IconButton(
-                onPressed: (){},
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => CommentsScreen(
+                            snap: widget.snap,
+                          )),
+                ),
                 icon: Icon(
                   Icons.comment_outlined,
                 ),
@@ -202,7 +227,7 @@ class _PostCardState extends State<PostCard> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 4),
                     child: Text(
-                      'View all 100 comments',
+                      'View all $commentLen comments',
                       style: const TextStyle(
                         fontSize: 16,
                         color: secondaryColor,

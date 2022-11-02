@@ -17,6 +17,7 @@ export '../utils/values.dart';
 export '../widgets/input_text_field.dart';
 export '../widgets/post_card.dart';
 export '../widgets/like_animation.dart';
+export '../widgets/comment_card.dart';
 
 ///functions
 export '../functions/pick_image.dart';
@@ -37,5 +38,6 @@ export '../screens/login_screen.dart';
 export '../screens/signup_screen.dart';
 export '../screens/add_post_screen.dart';
 export '../screens/feed_screen.dart';
+export '../screens/comments_screen.dart';
 
 export '../providers/user_provider.dart';
