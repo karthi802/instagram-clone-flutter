@@ -100,7 +100,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             borderColor: Colors.grey,
                                             text: 'Sign Out',
                                             textColor: Colors.grey,
-                                            function: () {},
+                                            function: () async {
+                                              await AuthMethods().signOut();
+                                              Navigator.of(context).pushReplacement(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const LoginScreen()
+                                                        )
+                                              );
+                                            },
                                           )
                                         : isFollowing
                                             ? FollowButton(

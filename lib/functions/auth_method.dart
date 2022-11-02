@@ -10,8 +10,7 @@ class AuthMethods {
     DocumentSnapshot snap =
         await _firestore.collection('users').doc(currentUser.uid).get();
 
-    return Person.fromSnap(snap); 
-
+    return Person.fromSnap(snap);
   }
 
   //Signup user
@@ -80,5 +79,9 @@ class AuthMethods {
       res = err.toString();
     }
     return res;
+  }
+
+  Future<void> signOut() async {
+    await _auth.signOut();
   }
 }
