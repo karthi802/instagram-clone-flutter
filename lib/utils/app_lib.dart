@@ -18,6 +18,7 @@ export '../widgets/input_text_field.dart';
 export '../widgets/post_card.dart';
 export '../widgets/like_animation.dart';
 export '../widgets/comment_card.dart';
+export '../widgets/follow_button.dart';
 
 ///functions
 export '../functions/pick_image.dart';
@@ -40,5 +41,6 @@ export '../screens/add_post_screen.dart';
 export '../screens/feed_screen.dart';
 export '../screens/comments_screen.dart';
 export '../screens/search_screen.dart';
+export '../screens/profile_screen.dart';
 
 export '../providers/user_provider.dart';

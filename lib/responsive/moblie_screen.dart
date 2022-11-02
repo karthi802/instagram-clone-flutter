@@ -16,7 +16,9 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
     SearchScreen(),
     AddPostScreen(),
     Text('notification'),
-    Text('profile'),
+    ProfileScreen(
+      uid:FirebaseAuth.instance.currentUser!.uid,
+    ),
   ];
 
   @override
