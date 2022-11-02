@@ -98,7 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             backgroundColor:
                                                 mobileBackgroundColor,
                                             borderColor: Colors.grey,
-                                            text: 'Edit Profile',
+                                            text: 'Sign Out',
                                             textColor: Colors.grey,
                                             function: () {},
                                           )
@@ -108,14 +108,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 borderColor: Colors.grey,
                                                 text: 'Unfollow',
                                                 textColor: Colors.black,
-                                                function: () {},
+                                                function: () async {
+                                                  await FirestoreMethods()
+                                                      .followUser(
+                                                          FirebaseAuth.instance
+                                                              .currentUser!.uid,
+                                                          userData['uid']);
+                                                  setState(() {
+                                                    isFollowing = false;
+                                                    followers--;
+                                                  });
+                                                },
                                               )
                                             : FollowButton(
                                                 backgroundColor: Colors.blue,
                                                 borderColor: Colors.blue,
                                                 text: 'Follow',
                                                 textColor: Colors.white,
-                                                function: () {},
+                                                function: () async {
+                                                  await FirestoreMethods()
+                                                      .followUser(
+                                                          FirebaseAuth.instance
+                                                              .currentUser!.uid,
+                                                          userData['uid']);
+                                                  setState(() {
+                                                    isFollowing = true;
+                                                    followers++;
+                                                  });
+                                                },
                                               )
                                   ],
                                 ),
@@ -169,13 +189,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 (snapshot.data! as dynamic).docs[index];
 
                             return Container(
-                              child: Image(
-                                image: NetworkImage(
-                                  snap['postUrl']
-                                ),
-                                fit: BoxFit.cover,
-                              )
-                            );
+                                child: Image(
+                              image: NetworkImage(snap['postUrl']),
+                              fit: BoxFit.cover,
+                            ));
                           });
                     }),
               ],
