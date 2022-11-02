@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:instagram_clone_flutter/screens/add_post_screen.dart';
 import '../utils/app_lib.dart';
 
 class MobileScreenLayout extends StatefulWidget {
@@ -13,7 +12,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   int _page = 0;
   late PageController pageController;
   final homeScreenItems = [
-    Text('home'),
+    FeedScreen(),
     Text('search'),
     AddPostScreen(),
     Text('notification'),
@@ -37,7 +36,6 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   }
 
   void pageChange(int page) {
-    debugPrint("tapped on $page");
     setState(() {
       _page = page;
     });

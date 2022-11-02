@@ -15,6 +15,8 @@ export '../utils/values.dart';
 
 /// widgets
 export '../widgets/input_text_field.dart';
+export '../widgets/post_card.dart';
+export '../widgets/like_animation.dart';
 
 ///functions
 export '../functions/pick_image.dart';
@@ -33,5 +35,7 @@ export '../responsive/moblie_screen.dart';
 export '../responsive/web_screen.dart';
 export '../screens/login_screen.dart';
 export '../screens/signup_screen.dart';
+export '../screens/add_post_screen.dart';
+export '../screens/feed_screen.dart';
 
 export '../providers/user_provider.dart';
