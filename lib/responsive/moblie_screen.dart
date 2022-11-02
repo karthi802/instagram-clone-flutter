@@ -13,7 +13,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   late PageController pageController;
   final homeScreenItems = [
     FeedScreen(),
-    Text('search'),
+    SearchScreen(),
     AddPostScreen(),
     Text('notification'),
     Text('profile'),

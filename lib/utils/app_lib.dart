@@ -39,5 +39,6 @@ export '../screens/signup_screen.dart';
 export '../screens/add_post_screen.dart';
 export '../screens/feed_screen.dart';
 export '../screens/comments_screen.dart';
+export '../screens/search_screen.dart';
 
 export '../providers/user_provider.dart';
