@@ -55,6 +55,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return isLoading
         ? const Center(child: CircularProgressIndicator())
         : Scaffold(
@@ -64,6 +66,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               centerTitle: false,
             ),
             body: ListView(
+              padding: EdgeInsets.symmetric(
+                    horizontal: width > webScreenSize ? width * 0.3 : 0,
+                    vertical: width > webScreenSize ? 15 : 0
+                ),
               children: [
                 Padding(
                   padding: const EdgeInsets.all(16),
@@ -91,6 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ],
                                 ),
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     FirebaseAuth.instance.currentUser!.uid ==
                                             widget.uid

@@ -39,9 +39,15 @@ class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     final Person person = Provider.of<UserProvider>(context).getUser;
+    final width = MediaQuery.of(context).size.width;
 
     return Container(
-      color: mobileBackgroundColor,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: width > webScreenSize ? secondaryColor : mobileBackgroundColor,
+        ),
+        color: mobileBackgroundColor,
+      ),
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         children: [
@@ -53,7 +59,7 @@ class _PostCardState extends State<PostCard> {
                 CircleAvatar(
                   radius: 16,
                   backgroundImage: NetworkImage(
-                    widget.snap['profileImage'],
+                    widget.snap['profileImage'].toString(),
                   ),
                 ),
                 Expanded(
@@ -120,7 +126,7 @@ class _PostCardState extends State<PostCard> {
                 height: MediaQuery.of(context).size.height * 0.35,
                 width: double.infinity,
                 child: Image.network(
-                  widget.snap['postUrl'],
+                  widget.snap['postUrl'].toString(),
                   fit: BoxFit.cover,
                 ),
               ),
